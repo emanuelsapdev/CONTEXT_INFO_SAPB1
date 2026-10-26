@@ -1,0 +1,22 @@
+# OUBR - Branches
+
+- **Tabla:** OUBR
+- **Descripción:** Branches
+- **Cantidad de campos:** 4
+- **Fuente:** https://help.sap.com/doc/089315d8d0f8475a9fc84fb919b501a3/10.0/en-US/SDKHelp/OUBR.html
+
+## Campos (4)
+
+| # | Campo | Descripción | Tipo | Tamaño | Relacionada | Valor por defecto | Valores válidos (Constraints) |
+|---|---|---|---|---|---|---|---|
+| 1 | `Code` | Code | Int | 6 | - |  |  |
+| 2 | `Name` | Branches Name | nVarChar | 20 | - |  |  |
+| 3 | `Remarks` | Description | nVarChar | 100 | - |  |  |
+| 4 | `UserSign` | User Signature | Int | 6 | [OUSR](OUSR.md) |  |  |
+
+## Claves e índices (2)
+
+| Clave / Índice | Única | Campos |
+|---|---|---|
+| PRIMARY | Yes | Code |
+| NAME | Yes | Name |

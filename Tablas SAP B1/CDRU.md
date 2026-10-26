@@ -1,0 +1,21 @@
+# CDRU - Drag & Relate User Settings
+
+- **Tabla:** CDRU
+- **Descripción:** Drag & Relate User Settings
+- **Cantidad de campos:** 4
+- **Fuente:** https://help.sap.com/doc/089315d8d0f8475a9fc84fb919b501a3/10.0/en-US/SDKHelp/CDRU.html
+
+## Campos (4)
+
+| # | Campo | Descripción | Tipo | Tamaño | Relacionada | Valor por defecto | Valores válidos (Constraints) |
+|---|---|---|---|---|---|---|---|
+| 1 | `UserID` | User ID | Int | 11 | - | -1 |  |
+| 2 | `ObjectId` | ObjectId | nVarChar | 4 | - |  |  |
+| 3 | `PartOf` | PartOf | VarChar | 1 | - | C | `C` = Category<br>`R` = Report<br>`F` = Table |
+| 4 | `Disabled` | Disabled | VarChar | 1 | - | N | `Y` = Yes<br>`N` = No |
+
+## Claves e índices (1)
+
+| Clave / Índice | Única | Campos |
+|---|---|---|
+| PRIMARY | Yes | UserID, ObjectId, PartOf |

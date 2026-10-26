@@ -1,0 +1,23 @@
+# LinkedDocTypeEnum — Tipo de documento vinculado
+
+> Generated from the Service Layer `$metadata` (OData v4, `/b1s/v2/`). User-created UDFs/UDTs/UDOs removed; SAP Argentina localization UDFs (`U_B1SYS_*`) kept and marked **[Loc. AR]**. English descriptions are derived from the property names; Spanish descriptions follow SAP Business One Spanish terminology.
+
+- **Enum type:** `LinkedDocTypeEnum`
+- **Descripción (ES):** Tipo de documento vinculado
+- **Underlying type:** Edm.Int32
+- **Members:** 6
+
+> Service Layer accepts the member **name** (e.g. `tYES`) in JSON payloads and filters; for many enums the stored database value (e.g. `Y`) is also accepted. `Value` below is the OData numeric value.
+
+| Member (name) | Value | Description (EN) | Descripción (ES) |
+|---|---|---|---|
+| `ldtEmptyLink` | 0 | Empty Link | Sin vínculo |
+| `ldtSalesOpportunitiesLink` | 1 | Sales Opportunities Link | Oportunidad de venta |
+| `ldtSalesQuotationsLink` | 2 | Sales Quotations Link | Oferta de ventas |
+| `ldtSalesOrdersLink` | 3 | Sales Orders Link | Pedido de cliente |
+| `ldtDeliveriesLink` | 4 | Deliveries Link | Entrega |
+| `ldtARInvoicesLink` | 5 | AR Invoices Link | Factura de clientes |
+
+## Used by (1 properties)
+
+- [CampaignBusinessPartner](../Tipos-Complejos/CampaignBusinessPartner.md).`DocType`

@@ -1,0 +1,20 @@
+# WPK4 - Dashboard Legend Color Value
+
+- **Tabla:** WPK4
+- **Descripción:** Dashboard Legend Color Value
+- **Cantidad de campos:** 3
+- **Fuente:** https://help.sap.com/doc/089315d8d0f8475a9fc84fb919b501a3/10.0/en-US/SDKHelp/WPK4.html
+
+## Campos (3)
+
+| # | Campo | Descripción | Tipo | Tamaño | Relacionada | Valor por defecto | Valores válidos (Constraints) |
+|---|---|---|---|---|---|---|---|
+| 1 | `AbsEntry` | Internal Number | Int | 11 | - |  |  |
+| 2 | `FldEntry` | Field Entry | Int | 11 | - |  |  |
+| 3 | `Value` | Legend Color Value | nVarChar | 250 | - |  |  |
+
+## Claves e índices (1)
+
+| Clave / Índice | Única | Campos |
+|---|---|---|
+| PRIMARY | Yes | AbsEntry |

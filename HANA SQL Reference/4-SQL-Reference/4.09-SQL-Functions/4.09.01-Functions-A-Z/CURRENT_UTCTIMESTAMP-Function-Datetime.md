@@ -1,0 +1,32 @@
+# 4.9.1.66 CURRENT_UTCTIMESTAMP Function (Datetime)
+
+> [↑ 4.9.1 Alphabetical List Of Functions](README.md) · Fuente: *SAP HANA SQL Reference Guide for SAP HANA Platform (SAP HANA Platform 2.0)*, páginas 173–174
+
+Returns the current UTC timestamp.
+
+## Syntax
+
+```sql
+CURRENT_UTCTIMESTAMP
+```
+
+## Description
+
+Returns the current UTC timestamp.
+
+## Example
+
+The following example returns the local and UTC timestamp of the system:
+
+```sql
+SELECT CURRENT_TIMESTAMP "Current Timestamp", CURRENT_UTCTIMESTAMP "Coordinated
+Universal Timestamp" FROM DUMMY;
+```
+
+|   | **Current Timestamp** | **Coordinated Universal Timestamp** |
+| --- | --- | --- |
+| 1 | May 1, 2019 7:56:51.5 AM | May 1, 2019 2:56:51.5 PM |
+
+## Related Information
+
+[Datetime Data Types](../../4.03-Data-Types/4.03.05-Datetime-Data-Types.md)

@@ -1,0 +1,41 @@
+# 4.10.1.19.64 ALTER SYSTEM VALIDATE ENCRYPTION ROOT KEYS BACKUP PASSWORD Statement (System Management)
+
+> [↑ 4.10.1.19 ALTER SYSTEM ... (All ALTER SYSTEM Statements)](README.md) · Fuente: *SAP HANA SQL Reference Guide for SAP HANA Platform (SAP HANA Platform 2.0)*, páginas 562–563
+
+Verifies that the encryption root key backup password that is specified on the command line is the same as the one stored in the encryption root key store.
+
+## Syntax
+
+```sql
+ALTER SYSTEM VALIDATE ENCRYPTION ROOT KEYS BACKUP PASSWORD <password>
+```
+
+## Syntax Elements
+
+#### password
+
+The specified password is compared with the password stored in the encryption root key store.
+
+## Description
+
+This statement must be executed in the database for which the root key backup password is being specified.
+
+The password is stored in the encryption root key store (instance SSFS or local secure store (LSS)).
+
+For more information about encryption in the SAP HANA database, see the SAP HANA Security Guide and the SAP HANA Administration Guide.
+
+## Permissions
+
+You must have the ENCRYPTION ROOT KEY ADMIN privilege to execute this statement.
+
+## Example
+
+Check that the password My1Chosen2Password3 is the same as the encryption root key backup password that is stored in the encryption root key store.
+
+```sql
+ALTER SYSTEM VALIDATE ENCRYPTION ROOT KEYS BACKUP PASSWORD 'My1Chosen2Password3';
+```
+
+## Related Information
+
+M_PERSISTENCE_ENCRYPTION_KEYS System View [→](../../../../6-System-Views-Reference/6.02-Monitoring-Views/M_PERSISTENCE_ENCRYPTION_KEYS-System-View.md) ALTER SYSTEM VALIDATE ENCRYPTION ROOT KEYS BACKUP PASSWORD Statement (System Management) [→](ALTER-SYSTEM-VALIDATE-ENCRYPTION-ROOT-KEYS-BACKUP-PASSWORD.md) ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Statement (System Management) [→](ALTER-SYSTEM-SET-ENCRYPTION-ROOT-KEYS-BACKUP-PASSWORD.md) ALTER SYSTEM BACKUP ENCRYPTION Statement (System Management) [→](ALTER-SYSTEM-BACKUP-ENCRYPTION-Statement-System-Management.md) ALTER SYSTEM APPLICATION ENCRYPTION Statement (System Management) [→](ALTER-SYSTEM-APPLICATION-ENCRYPTION-Statement-System.md) ALTER SYSTEM LOG ENCRYPTION Statement (System Management) [→](ALTER-SYSTEM-LOG-ENCRYPTION-Statement-System-Management.md) ALTER SYSTEM PERSISTENCE ENCRYPTION Statement (System Management) [→](ALTER-SYSTEM-PERSISTENCE-ENCRYPTION-Statement-System.md) ENCRYPTION_ROOT_KEYS_EXTRACT_KEYS Function (Security) [→](../../../4.09-SQL-Functions/4.09.01-Functions-A-Z/ENCRYPTION_ROOT_KEYS_EXTRACT_KEYS-Function-Security.md) ENCRYPTION_ROOT_KEYS System View [→](../../../../6-System-Views-Reference/6.01-System-Views/ENCRYPTION_ROOT_KEYS-System-View.md) APPLICATION_ENCRYPTION_KEYS System View [→](../../../../6-System-Views-Reference/6.01-System-Views/APPLICATION_ENCRYPTION_KEYS-System-View.md) M_ENCRYPTION_OVERVIEW System View [→](../../../../6-System-Views-Reference/6.02-Monitoring-Views/M_ENCRYPTION_OVERVIEW-System-View.md)

@@ -1,0 +1,21 @@
+# AIT3 - Items - Localization Fields - History
+
+- **Tabla:** AIT3
+- **Descripción:** Items - Localization Fields - History
+- **Cantidad de campos:** 4
+- **Fuente:** https://help.sap.com/doc/089315d8d0f8475a9fc84fb919b501a3/10.0/en-US/SDKHelp/AIT3.html
+
+## Campos (4)
+
+| # | Campo | Descripción | Tipo | Tamaño | Relacionada | Valor por defecto | Valores válidos (Constraints) |
+|---|---|---|---|---|---|---|---|
+| 1 | `ItemCode` | Item No. | nVarChar | 50 | [OITM](OITM.md) |  |  |
+| 2 | `IncNature` | Income Nature | nVarChar | 10 | [OBMI](OBMI.md) |  |  |
+| 3 | `LogInstanc` | IPI Class Code | Int | 11 | - |  |  |
+| 4 | `ObjType` | Log Instance | nVarChar | 20 | - | 0 |  |
+
+## Claves e índices (1)
+
+| Clave / Índice | Única | Campos |
+|---|---|---|
+| PRIMARY | Yes | ItemCode, LogInstanc |

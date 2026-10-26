@@ -1,0 +1,20 @@
+# ORCG - Web Client Report Categories
+
+- **Tabla:** ORCG
+- **Descripción:** Web Client Report Categories
+- **Cantidad de campos:** 3
+- **Fuente:** https://help.sap.com/doc/089315d8d0f8475a9fc84fb919b501a3/10.0/en-US/SDKHelp/ORCG.html
+
+## Campos (3)
+
+| # | Campo | Descripción | Tipo | Tamaño | Relacionada | Valor por defecto | Valores válidos (Constraints) |
+|---|---|---|---|---|---|---|---|
+| 1 | `Guid` | Category Guid | nVarChar | 32 | - |  |  |
+| 2 | `Name` | Category Name | nVarChar | 120 | - |  |  |
+| 3 | `IsSystem` | Is System | VarChar | 1 | - | N | `Y` = Yes<br>`N` = No |
+
+## Claves e índices (1)
+
+| Clave / Índice | Única | Campos |
+|---|---|---|
+| PRIMARY | Yes | Guid |

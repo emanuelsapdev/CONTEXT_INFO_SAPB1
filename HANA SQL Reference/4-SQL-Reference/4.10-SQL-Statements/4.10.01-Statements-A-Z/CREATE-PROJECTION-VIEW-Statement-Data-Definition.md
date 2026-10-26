@@ -1,0 +1,163 @@
+# 4.10.1.57 CREATE PROJECTION VIEW Statement (Data Definition)
+
+> [↑ 4.10.1 Alphabetical List of Statements](README.md) · Fuente: *SAP HANA SQL Reference Guide for SAP HANA Platform (SAP HANA Platform 2.0)*, páginas 751–754
+
+Creates a projection view. Projection views can be used as updatable views; insert, update, and delete triggers on projection views are supported.
+
+## Syntax
+
+```sql
+CREATE [ OR REPLACE ] PROJECTION VIEW <projection_view_name>
+[ ( <view_column_name_list> ) ]
+ AS SELECT <table_column_list>
+ FROM [ <schema>.]<source_table_name>
+ [ <with_association_clause> ]
+ [ <with_annotations_clause> ]
+ [ WITH DDL ONLY ]
+```
+
+## Syntax Elements
+
+#### OR REPLACE
+
+Replaces the projection view if it already exists; otherwise, if the view does not exist, then it is created.
+
+A CREATE OR REPLACE operation does not change the ID of an existing projection view, and maintains any privileges associated with the view.
+
+#### projection_view_name
+
+Specifies a name for the new projection view.
+
+#### view_column_name_list
+
+Specifies alternative names for the columns in the projection view if the names need to be different than those in `<table_column_list>`.
+
+#### table_column_list
+
+Specifies the columns in `<source_table_name>` to include in the projection view. `<table_column_list>` must include all primary key columns of the underlying source table.
+
+#### source_table_name
+
+Specifies the source table for the projection view.
+
+#### with_association_clause
+
+Creates a relationship between the view being created and one or more existing tables.
+
+```sql
+<with_association_clause> ::=
+ WITH ASSOCIATIONS (<association_def_list>)
+<association_def_list> ::= <association_def>, ...
+<association_def> ::= <forward_join_def> | <propagation_def>
+<forward_join_def> ::= <join_cardinality_class>
+[<join_cardinality_class>] ::= JOIN <table_or_view_identifier> [AS
+<table_alias>] ON <condition>
+  | <propagation_def>
+<join_cardinality> ::=
+ MANY TO ONE
+ | MANY TO MANY
+ | ONE TO ONE
+ | ONE TO MANY
+<propagation_def> ::= [<schema>.][<table>.]<association_identifier> [AS
+<alias>]
+```
+
+#### WITH annotations
+
+Specifies view-, column-, and parameter-level annotations in the form of key/value pairs. You can reference annotations in subsequent queries to filter results.
+
+```sql
+<with_annotation_clause> ::= WITH ANNOTATIONS ( { [ <set_view_annotations> ]
+[ <set_column_annotations> ] [ <set_parameter_annotations> ] } )
+<set_view_annotations> ::= <key_set_operation>
+<set_column_annotations> ::= <column_annotation> [ <column_annotation> […] ]
+<column_annotation> ::= COLUMN <column_ref> <key_set_operation>
+<set_parameter_annotations> ::= <parameter_annotation>
+[ <parameter_annotation> […] ]
+<parameter_annotation> ::= PARAMETER <column_ref> <key_set_operation>
+<key_set_operation> ::= SET <key_value_pair_list>
+<key_value_pair_list> ::= <key_value_pair> [, <key_value_pair> [,…] ]
+<key_value_pair> ::= '<key>'='<value>'
+<column_ref> ::= <identifier>
+<key> ::= <string>
+<value> ::= <string>
+```
+
+While you must specify annotation on at least one object with the WITH ANNOTATION clause (view, column, or parameter), there is no limit on the number of annotations or types of annotations you can specify.
+
+`<key>` and `<value>` represent the annotations you are configuring for the object (view, column, or parameter).
+
+#### WITH DDL ONLY
+
+Prevents users from querying the view and from modifying the underlying table.
+
+## Description
+
+You drop a projection view by using the normal DROP VIEW statement.
+
+## Examples
+
+The following example creates a projection view on a table, SEARCH_TEXT, and then inserts, modifies, and deletes data from the projection view:
+
+```sql
+CREATE ROW TABLE SEARCH_TEXT( Product NVARCHAR(200) PRIMARY KEY, Descrip
+NVARCHAR(200), Status NVARCHAR(200) );
+INSERT INTO SEARCH_TEXT VALUES( 'Blue baseball cap', 'Vintage', 'Out of stock');
+INSERT INTO SEARCH_TEXT VALUES( 'Red car', 'Vintage', 'Taking orders' );
+CREATE PROJECTION VIEW myProjView (Item, Description, Status) AS SELECT * FROM
+SEARCH_TEXT;
+INSERT INTO myProjView VALUES( 'Bluish sky', 'Retro', 'Discontinued' );
+UPDATE myProjView SET Status = 'Discontinued' WHERE Item = 'Blue baseball cap';
+DELETE FROM myProjView WHERE Item = 'Red car';
+SELECT * FROM myProjView;
+```
+
+| **ITEM** | **DESCRIPTION** | **STATUS** |
+| --- | --- | --- |
+| Bluish baseball cap | Vintage | Discontinued |
+| Bluish sky | Retro | Discontinued |
+
+The following example creates two tables and a projection view with associations to them:
+
+```sql
+CREATE ROW TABLE T1(A INT, B INT);
+INSERT INTO T1 VALUES(1,1);
+CREATE ROW TABLE T2(A INT, B INT);
+INSERT INTO T2 VALUES(1,1);
+INSERT INTO T2 VALUES(2,2);
+
+CREATE PROJECTION VIEW V1 AS SELECT A, B FROM T1 WITH ASSOCIATIONS(JOIN T2 AS C
+ON C.A = A);
+
+SELECT C.A, C.B FROM V1;
+```
+
+| **A** | **B** |
+| --- | --- |
+| 1 | 1 |
+
+The following example creates a table with annotations and then creates a projection view that also has annotations:
+
+```sql
+CREATE TABLE t1(c1 INT) WITH ANNOTATIONS(
+    SET 't_k1' = 't_v1', 't_k2' = 't_v2'
+    COLUMN c1 SET 'c_k1' = 'c_v1', 'c_k2' = 'c_v2');
+CREATE PROJECTION VIEW v2 AS SELECT * FROM t1 WITH ANNOTATIONS(
+    SET 'v_k1' = 'v_v1', 'v_k2' = 'v_v2'
+    COLUMN c1 SET 'c_k1' = 'c_v1', 'c_k2' = 'c_v2');
+```
+
+The following statements show how you to use the WITH DDL ONLY clause to control whether users can query a view:
+
+```sql
+CREATE TABLE t1 (a int, b int);
+CREATE PROJECTION VIEW v1 AS SELECT * FROM t1 WITH DDL ONLY;
+SELECT * FROM v1; -- invalid view name: cannot select the view because it is in
+DDL-only mode
+SELECT IS_DDL_ONLY from VIEWS where VIEW_NAME = 'V1'; -- returns TRUE
+CREATE PROJECTION VIEW v2 AS SELECT * FROM v1; -- you can select from the view
+```
+
+## Related Information
+
+[DROP VIEW Statement (Data Definition)](DROP-VIEW-Statement-Data-Definition.md)
